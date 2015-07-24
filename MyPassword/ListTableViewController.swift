@@ -23,19 +23,19 @@ class ListTableViewController: UITableViewController {
   }
   
   // MARK: - Actions
-  private func _handleAddBarButtonItemAction() {
+  func _handleAddBarButtonItemAction() {
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
     var detailVC = storyBoard.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
     detailVC.showType = .Add
     self.navigationController?.pushViewController(detailVC, animated: true)
   }
   
-  private func _handleCoreDataDidSaveAction(note: NSNotification) {
+  func _handleCoreDataDidSaveAction(note: NSNotification) {
     self._reloadData()
   }
   
   // MARK: - Private methods
-  private func _reloadData() {
+  func _reloadData() {
     self.passwordList = CoreDataManager.defaultManager.passwordList() as? [MyPassword]
     self.tableView.reloadData()
   }

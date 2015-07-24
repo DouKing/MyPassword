@@ -77,7 +77,7 @@ class DetailViewController: UIViewController {
     }
   }
   
-  private func _checkTitleValid() -> Bool {
+  func _checkTitleValid() -> Bool {
     var title = titleTextField.text
     title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     if title.isEmpty {
@@ -87,7 +87,7 @@ class DetailViewController: UIViewController {
     return true
   }
   
-  private func _modifyMyPassword() {
+  func _modifyMyPassword() {
     var password: MyPassword?
     let titleData = SecurityUtil.encryptAESData(titleTextField.text)
     let descriptionData = SecurityUtil.encryptAESData(descriptionTextField.text)
