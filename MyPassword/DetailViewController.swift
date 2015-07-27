@@ -18,6 +18,9 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var descriptionTextField: UITextField!
   @IBOutlet weak var detailTextField: UITextField!
   @IBOutlet weak var confirmButton: UIButton!
+  
+  var showBarButtonItem: UIBarButtonItem!
+  var show = true
   var password: MyPassword?
   var showType: ShowType?
   
@@ -45,7 +48,11 @@ class DetailViewController: UIViewController {
       self.navigationItem.rightBarButtonItem = nil
     case .Detail:
       self.view.userInteractionEnabled = false
-      self.navigationItem.rightBarButtonItem = self.editButtonItem()
+      showBarButtonItem = UIBarButtonItem(title: "显示", style: UIBarButtonItemStyle.Plain, target: self, action: "_handleShowBarButtonItemAction:")
+      self.navigationItem.rightBarButtonItems = [self.editButtonItem(), showBarButtonItem]
+      self.titleTextField.secureTextEntry = true
+      self.descriptionTextField.secureTextEntry = true
+      self.detailTextField.secureTextEntry = true
       self.confirmButton.hidden = true
       self.titleTextField.text = self.titleStr
       self.descriptionTextField.text = self.descriptionStr
@@ -106,6 +113,21 @@ class DetailViewController: UIViewController {
     password?.p_title = title
     password?.p_description = description
     password?.p_detail = detail
+  }
+  
+  func _handleShowBarButtonItemAction(sender: UIBarButtonItem) {
+    if self.show {
+      showBarButtonItem.title = "隐藏"
+      titleTextField.secureTextEntry = false
+      descriptionTextField.secureTextEntry = false
+      detailTextField.secureTextEntry = false
+    } else {
+      showBarButtonItem.title = "显示"
+      titleTextField.secureTextEntry = true
+      descriptionTextField.secureTextEntry = true
+      detailTextField.secureTextEntry = true
+    }
+    self.show = !self.show
   }
   
   override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

@@ -85,7 +85,7 @@ class CoreDataManager: NSObject {
   /// 单例
   static let defaultManager: CoreDataManager = {
     return CoreDataManager()
-    }()
+  }()
 
   // 创建实体对象
   func creatPassword() -> MyPassword {
