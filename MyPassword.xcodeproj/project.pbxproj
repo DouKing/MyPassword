@@ -13,6 +13,7 @@
 		B8075F211B5758DE00C33E33 /* SecurityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B8075F1D1B5758DE00C33E33 /* SecurityUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B8075F291B57747E00C33E33 /* MyPassword.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8075F271B57747E00C33E33 /* MyPassword.xcdatamodeld */; };
 		B8075F2B1B5774D500C33E33 /* MyPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8075F2A1B5774D500C33E33 /* MyPassword.swift */; };
+		B840797F1B665001005D537C /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B840797E1B665001005D537C /* PasswordViewController.swift */; };
 		B844C4901B54F33300577F73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B844C48F1B54F33200577F73 /* AppDelegate.swift */; };
 		B844C4951B54F33300577F73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B844C4931B54F33300577F73 /* Main.storyboard */; };
 		B844C4971B54F33300577F73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B844C4961B54F33300577F73 /* Images.xcassets */; };
@@ -45,6 +46,7 @@
 		B8075F1D1B5758DE00C33E33 /* SecurityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityUtil.m; sourceTree = "<group>"; };
 		B8075F281B57747E00C33E33 /* MyPassword.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyPassword.xcdatamodel; sourceTree = "<group>"; };
 		B8075F2A1B5774D500C33E33 /* MyPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPassword.swift; sourceTree = "<group>"; };
+		B840797E1B665001005D537C /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		B844C48A1B54F33200577F73 /* MyPassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B844C48E1B54F33200577F73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B844C48F1B54F33200577F73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				B844C4B41B55101600577F73 /* CoreDataModel */,
 				B844C4B31B550FC300577F73 /* CoreDataManager */,
 				B844C48F1B54F33200577F73 /* AppDelegate.swift */,
+				B840797E1B665001005D537C /* PasswordViewController.swift */,
 				B844C4AF1B54F42700577F73 /* ListTableViewController.swift */,
 				B844C4B11B54FE1D00577F73 /* DetailViewController.swift */,
 				B844C4931B54F33300577F73 /* Main.storyboard */,
@@ -283,6 +286,7 @@
 				B844C4BF1B5515C300577F73 /* CoreDataManager.swift in Sources */,
 				B844C4B21B54FE1D00577F73 /* DetailViewController.swift in Sources */,
 				B8075F211B5758DE00C33E33 /* SecurityUtil.m in Sources */,
+				B840797F1B665001005D537C /* PasswordViewController.swift in Sources */,
 				B8075F201B5758DE00C33E33 /* NSString+MD5.m in Sources */,
 				B8075F291B57747E00C33E33 /* MyPassword.xcdatamodeld in Sources */,
 				B844C4901B54F33300577F73 /* AppDelegate.swift in Sources */,
@@ -420,6 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MyPassword/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -434,6 +439,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = MyPassword/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
