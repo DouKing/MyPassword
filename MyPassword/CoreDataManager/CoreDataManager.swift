@@ -22,10 +22,10 @@ class CoreDataManager: NSObject {
   /// 沙盒目录
   final var applicationDocumentURL: NSURL {
     get {
-      let documentPathList = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-      let sqlitePath = documentPathList.last?.stringByAppendingPathComponent("MyPassword.sqlite")
-      println(sqlitePath)
-      return NSURL(fileURLWithPath: sqlitePath!)!
+      let documentPathList: NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+      let sqlitePath = documentPathList.stringByAppendingPathComponent("MyPassword.sqlite")
+      print(sqlitePath)
+      return NSURL(fileURLWithPath: sqlitePath)
     }
   }
   
@@ -42,11 +42,17 @@ class CoreDataManager: NSObject {
       // 设置版本升级
       let options = [NSMigratePersistentStoresAutomaticallyOption : NSNumber(bool: true)]
       var error: NSError?
-      let persistentStore = _coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.applicationDocumentURL, options: options, error: &error)
+      let persistentStore: NSPersistentStore?
+      do {
+        persistentStore = try _coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.applicationDocumentURL, options: options)
+      } catch let error1 as NSError {
+        error = error1
+        persistentStore = nil
+      }
       if persistentStore == nil {
         let dic = [NSLocalizedDescriptionKey:"failed to return NSPersistentStoreCoordinator", NSLocalizedFailureReasonErrorKey:"There was an error NSPersistentStoreCoordinator", NSUnderlyingErrorKey:error!]
         error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dic)
-        println("NSPersistentStoreCoordinator error: \(error)\n\(error?.userInfo)")
+        print("NSPersistentStoreCoordinator error: \(error)\n\(error?.userInfo)")
         abort()
       }
     }
@@ -71,16 +77,15 @@ class CoreDataManager: NSObject {
   /// 保存
   final func save() {
     if self.context().hasChanges {
-      var error: NSError?
-      if !(self.context().save(&error)) {
-        println("coreData save error: \(error?.userInfo)")
+      do {
+        try self.context().save()
+      } catch {
+        print("coreData save error: \(error)")
       }
       NSNotificationCenter.defaultCenter().postNotificationName(kCoreDataDidSaveNotification, object: nil)
     }
   }
-  
-/*******************************************************************************************************/
-  
+    
   // MARK: - Publick Methods
   /// 单例
   static let defaultManager: CoreDataManager = {
@@ -110,7 +115,7 @@ class CoreDataManager: NSObject {
   // 读取实体对象列表
   func passwordList() -> NSArray {
     let request = NSFetchRequest(entityName: "MyPassword")
-    let list = self.context().executeFetchRequest(request, error: nil)
+    let list = try? self.context().executeFetchRequest(request)
     return list!
   }
 }

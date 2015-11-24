@@ -25,7 +25,7 @@ class ListTableViewController: UITableViewController {
   // MARK: - Actions
   func _handleAddBarButtonItemAction() {
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    var detailVC = storyBoard.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+    let detailVC = storyBoard.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
     detailVC.showType = .Add
     self.navigationController?.pushViewController(detailVC, animated: true)
   }
@@ -54,11 +54,11 @@ class ListTableViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("listTableViewCell", forIndexPath: indexPath) as! UITableViewCell
-    println(self.passwordList)
+    let cell = tableView.dequeueReusableCellWithIdentifier("listTableViewCell", forIndexPath: indexPath) 
+    print(self.passwordList)
     let password = self.passwordList![indexPath.row] as MyPassword
     let content = password.p_title
-    let data = NSData(base64EncodedString: content, options: NSDataBase64DecodingOptions.allZeros)
+    let data = NSData(base64EncodedString: content, options: NSDataBase64DecodingOptions())
     let str = SecurityUtil.decryptAESData(data)
     cell.textLabel?.text = str
     return cell
@@ -83,7 +83,7 @@ class ListTableViewController: UITableViewController {
   // MARK: - Navigation
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+    let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
     detailVC.showType = ShowType.Detail
     if let cell: AnyObject = sender {
       let indexPath = self.tableView.indexPathForCell(cell as! UITableViewCell)

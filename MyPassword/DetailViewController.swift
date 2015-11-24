@@ -26,17 +26,17 @@ class DetailViewController: UIViewController {
   
   var titleStr: String {
     let title = password!.p_title
-    let data = NSData(base64EncodedString: title, options: NSDataBase64DecodingOptions.allZeros)
+    let data = NSData(base64EncodedString: title, options: NSDataBase64DecodingOptions())
     return SecurityUtil.decryptAESData(data)
   }
   var descriptionStr: String {
     let description = password!.p_description;
-    let data = NSData(base64EncodedString: description, options: NSDataBase64DecodingOptions.allZeros)
+    let data = NSData(base64EncodedString: description, options: NSDataBase64DecodingOptions())
     return SecurityUtil.decryptAESData(data)
   }
   var detailStr: String {
     let detail = password!.p_detail
-    let data = NSData(base64EncodedString: detail, options: NSDataBase64DecodingOptions.allZeros)
+    let data = NSData(base64EncodedString: detail, options: NSDataBase64DecodingOptions())
     return SecurityUtil.decryptAESData(data)
   }
   
@@ -86,8 +86,8 @@ class DetailViewController: UIViewController {
   
   func _checkTitleValid() -> Bool {
     var title = titleTextField.text
-    title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-    if title.isEmpty {
+    title = title!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    if title!.isEmpty {
       UIAlertView(title: nil, message: "标题不能为空", delegate: nil, cancelButtonTitle: "知道了").show()
       return false
     }
@@ -99,10 +99,10 @@ class DetailViewController: UIViewController {
     let titleData = SecurityUtil.encryptAESData(titleTextField.text)
     let descriptionData = SecurityUtil.encryptAESData(descriptionTextField.text)
     let detailData = SecurityUtil.encryptAESData(detailTextField.text)
-    println("titleData: \(titleData)")
-    let title = titleData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
-    let description = descriptionData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
-    let detail = detailData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
+    print("titleData: \(titleData)")
+    let title = titleData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
+    let description = descriptionData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
+    let detail = detailData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
     
     switch self.showType! {
     case .Add:
@@ -130,7 +130,7 @@ class DetailViewController: UIViewController {
     self.show = !self.show
   }
   
-  override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     self.view.endEditing(true)
   }
 }
